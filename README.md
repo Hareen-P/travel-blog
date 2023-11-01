@@ -1,120 +1,79 @@
-> March, 2016: If you're on an old version of Jekyll Now and run into a) build warnings or b) syntax highlighting issues caused by [Jekyll 3 and GitHub Pages updates](https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0), just :sparkles:[update your _config.yml](https://github.com/barryclark/jekyll-now/pull/445/files):sparkles: and you'll be set!
+Creating a static travel blog website using Jekyll in IBM Cloud involves several steps. Jekyll is a popular static site generator that can help you create a simple and efficient website. Here's a step-by-step guide on how to do it:
 
-# Jekyll Now
+## Step 1: Set up your IBM Cloud Account
 
-**Jekyll** is a static site generator that's perfect for GitHub hosted blogs ([Jekyll Repository](https://github.com/jekyll/jekyll))
+If you don't already have an IBM Cloud account, you'll need to sign up for one. Go to the IBM Cloud website and follow the instructions to create an account.
 
-**Jekyll Now** makes it easier to create your Jekyll blog, by eliminating a lot of the up front setup.
+**Step 2: Install Jekyll**
 
-- You don't need to touch the command line
-- You don't need to install/configure ruby, rvm/rbenv, ruby gems :relaxed:
-- You don't need to install runtime dependencies like markdown processors, Pygments, etc
-- If you're on Windows, this will make setting up Jekyll a lot easier
-- It's easy to try out, you can just delete your forked repository if you don't like it
+Before you start creating your travel blog website, you need to have Jekyll installed on your local machine. You can install Jekyll using RubyGems by running the following command in your terminal:
 
-In a few minutes you'll be set up with a minimal, responsive blog like the one below giving you more time to spend on writing epic blog posts!
+```bash
+gem install jekyll bundler
+```
 
-![Jekyll Now Theme Screenshot](/images/jekyll-now-theme-screenshot.jpg "Jekyll Now Theme Screenshot")
+**Step 3: Create a New Jekyll Project**
 
-## Quick Start
+Once Jekyll is installed, you can create a new Jekyll project for your travel blog. Navigate to the directory where you want to create your project and run the following command:
 
-### Step 1) Fork Jekyll Now to your User Repository
+```bash
+jekyll new mytravelblog
+```
 
-Fork this repo, then rename the repository to yourgithubusername.github.io.
+Replace `mytravelblog` with the name of your project.
 
-Your Jekyll blog will often be viewable immediately at <https://yourgithubusername.github.io> (if it's not, you can often force it to build by completing step 2)
+**Step 4: Customize Your Blog**
 
-![Step 1](/images/step1.gif "Step 1")
+You can customize your blog by editing the configuration file (`_config.yml`) and the templates in the `_layouts` and `_includes` directories. You can also add your own CSS styles and images to the project.
 
-### Step 2) Customize and view your site
+**Step 5: Add Blog Posts**
 
-Enter your site name, description, avatar and many other options by editing the _config.yml file. You can easily turn on Google Analytics tracking, Disqus commenting and social icons here too.
+To add blog posts, create Markdown (.md) files in the `_posts` directory. Each file should have a filename in the format `YYYY-MM-DD-title.md`, and it should contain the content of your blog post in Markdown format.
 
-Making a change to _config.yml (or any file in your repository) will force GitHub Pages to rebuild your site with jekyll. Your rebuilt site will be viewable a few seconds later at <https://yourgithubusername.github.io> - if not, give it ten minutes as GitHub suggests and it'll appear soon
+**Step 6: Test Your Website Locally**
 
-> There are 3 different ways that you can make changes to your blog's files:
+You can test your website locally by running the following command in your project directory:
 
-> 1. Edit files within your new username.github.io repository in the browser at GitHub.com (shown below).
-> 2. Use a third party GitHub content editor, like [Prose by Development Seed](http://prose.io). It's optimized for use with Jekyll making markdown editing, writing drafts, and uploading images really easy.
-> 3. Clone down your repository and make updates locally, then push them to your GitHub repository.
+```bash
+bundle exec jekyll serve
+```
 
-![_config.yml](/images/config.png "_config.yml")
+This will start a local web server, and you can preview your website by opening a web browser and navigating to `http://localhost:4000`.
 
-### Step 3) Publish your first blog post
+**Step 7: Set Up IBM Cloud**
 
-Edit `/_posts/2014-3-3-Hello-World.md` to publish your first blog post. This [Markdown Cheatsheet](http://www.jekyllnow.com/Markdown-Style-Guide/) might come in handy.
+Before deploying your website, you'll need to set up an IBM Cloud environment. If you haven't already, you can create a space in IBM Cloud and set up the Cloud Foundry CLI for deployment.
 
-![First Post](/images/first-post.png "First Post")
+**Step 8: Deploy Your Website to IBM Cloud**
 
-> You can add additional posts in the browser on GitHub.com too! Just hit the + icon in `/_posts/` to create new content. Just make sure to include the [front-matter](http://jekyllrb.com/docs/frontmatter/) block at the top of each new blog post and make sure the post's filename is in this format: year-month-day-title.md
+To deploy your Jekyll website to IBM Cloud, follow these steps:
 
-## Local Development
+1. Build your website using Jekyll by running the following command:
 
-1. Install Jekyll and plug-ins in one fell swoop. `gem install github-pages` This mirrors the plug-ins used by GitHub Pages on your local machine including Jekyll, Sass, etc.
-2. Clone down your fork `git clone https://github.com/yourusername/yourusername.github.io.git`
-3. Serve the site and watch for markup/sass changes `jekyll serve`
-4. View your website at http://127.0.0.1:4000/
-5. Commit any changes and push everything to the master branch of your GitHub user repository. GitHub Pages will then rebuild and serve your website.
+```bash
+JEKYLL_ENV=production bundle exec jekyll build
+```
 
-## Moar!
+2. Log in to IBM Cloud using the Cloud Foundry CLI by running:
 
-I've created a more detailed walkthrough, [**Build A Blog With Jekyll And GitHub Pages**](http://www.smashingmagazine.com/2014/08/01/build-blog-jekyll-github-pages/) over at the Smashing Magazine website. Check it out if you'd like a more detailed walkthrough and some background on Jekyll. :metal:
+```bash
+cf login
+```
 
-It covers:
+3. Push your website to IBM Cloud by running:
 
-- A more detailed walkthrough of setting up your Jekyll blog
-- Common issues that you might encounter while using Jekyll
-- Importing from Wordpress, using your own domain name, and blogging in your favorite editor
-- Theming in Jekyll, with Liquid templating examples
-- A quick look at Jekyll 2.0’s new features, including Sass/Coffeescript support and Collections
+```bash
+cf push mytravelblog -b staticfile_buildpack
+```
 
-## Jekyll Now Features
+Replace `mytravelblog` with your desired app name.
 
-✓ Command-line free _fork-first workflow_, using GitHub.com to create, customize and post to your blog  
-✓ Fully responsive and mobile optimized base theme (**[Theme Demo](http://jekyllnow.com)**)  
-✓ Sass/Coffeescript support using Jekyll 2.0  
-✓ Free hosting on your GitHub Pages user site  
-✓ Markdown blogging  
-✓ Syntax highlighting  
-✓ Disqus commenting  
-✓ Google Analytics integration  
-✓ SVG social icons for your footer  
-✓ 3 http requests, including your avatar  
+**Step 9: Access Your Live Website**
 
-✘ No installing dependencies
-✘ No need to set up local development  
-✘ No configuring plugins  
-✘ No need to spend time on theming  
-✘ More time to code other things ... wait ✓!  
+Once your website is successfully deployed, you can access it using the URL provided by IBM Cloud. Your travel blog is now live and accessible to the world.
 
-## Questions?
+**Step 10: Update Your Blog**
 
-[Open an Issue](https://github.com/barryclark/jekyll-now/issues/new) and let's chat!
+You can continue to update your blog by adding new posts or making changes to the site's content and layout. Remember to rebuild and redeploy your website when you make changes to see them reflected on the live site.
 
-## Other forkable themes
-
-You can use the [Quick Start](https://github.com/barryclark/jekyll-now#quick-start) workflow with other themes that are set up to be forked too! Here are some of my favorites:
-
-- [Hyde](https://github.com/poole/hyde) by MDO
-- [Lanyon](https://github.com/poole/lanyon) by MDO
-- [mojombo.github.io](https://github.com/mojombo/mojombo.github.io) by Tom Preston-Werner
-- [Left](https://github.com/holman/left) by Zach Holman
-- [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) by Michael Rose
-- [Skinny Bones](https://github.com/mmistakes/skinny-bones-jekyll) by Michael Rose
-
-## Credits
-
-- [Jekyll](https://github.com/jekyll/jekyll) - Thanks to its creators, contributors and maintainers.
-- [SVG icons](https://github.com/neilorangepeel/Free-Social-Icons) - Thanks, Neil Orange Peel. They're beautiful.
-- [Solarized Light Pygments](https://gist.github.com/edwardhotchkiss/2005058) - Thanks, Edward.
-- [Joel Glovier](http://joelglovier.com/writing/) - Great Jekyll articles. I used Joel's feed.xml in this repository.
-- [David Furnes](https://github.com/dfurnes), [Jon Uy](https://github.com/jonuy), [Luke Patton](https://github.com/lkpttn) - Thanks for the design/code reviews.
-- [Bart Kiers](https://github.com/bkiers), [Florian Simon](https://github.com/vermluh), [Henry Stanley](https://github.com/henryaj), [Hun Jae Lee](https://github.com/hunjaelee), [Javier Cejudo](https://github.com/javiercejudo), [Peter Etelej](https://github.com/etelej), [Ben Abbott](https://github.com/jaminscript), [Ray Nicholus](https://github.com/rnicholus), [Erin Grand](https://github.com/eringrand), [Léo Colombaro](https://github.com/LeoColomb), [Dean Attali](https://github.com/daattali), [Clayton Errington](https://github.com/cjerrington), [Colton Fitzgerald](https://github.com/coltonfitzgerald), [Trace Mayer](https://github.com/sunnankar) - Thanks for your [fantastic contributions](https://github.com/barryclark/jekyll-now/commits/master) to the project!
-
-## Contributing
-
-Issues and Pull Requests are greatly appreciated. If you've never contributed to an open source project before I'm more than happy to walk you through how to create a pull request.
-
-You can start by [opening an issue](https://github.com/barryclark/jekyll-now/issues/new) describing the problem that you're looking to resolve and we'll go from there.
-
-I want to keep Jekyll Now as minimal as possible. Every line of code should be one that's useful to 90% of the people using it. Please bear that in mind when submitting feature requests. If it's not something that most people will use, it probably won't get merged. :guardsman:
+That's a high-level overview of creating a static travel blog website using Jekyll in IBM Cloud. Be sure to refer to the official Jekyll and IBM Cloud documentation for more detailed information and troubleshooting.
