@@ -1,6 +1,6 @@
 ---
 layout: post
-title: You're up and running!
+title: 'Kanyakumari Wanderer: Southern Bliss in India'
 published: true
 ---
 ## This is the Travel blog website I created for Nan mudhalvan Project
